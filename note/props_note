@@ -1,0 +1,55 @@
+//////////////////////////////////////
+
+<template>
+    <div>{{this.name}}</div>
+</template>
+<script>
+export default {
+    props: ['name'],
+    data () {
+        return {}
+    },
+    computed: {},
+    methods: {}
+}
+</script>
+<style>
+
+</style>
+
+/////////////////////////////////////////////
+
+
+建一個 vue 設定 props 的名稱  並在 <template> 掛勾   就可被外部 vue 引用時 以上面的型式呈現出來
+
+
+
+
+
+範例為下 引入後 直接當成標籤 並已設定好的 標簽名 = "???" 來設定 需要的訊息
+
+/////////////////////////////////////////////
+<template>
+    
+    <div>  
+        <tester :name="'123'" ></tester>
+    </div>
+
+</template>
+
+
+<script>
+import tester from './components/tester.vue';
+
+    const app = {
+        
+        components: { 
+            tester
+         },
+        data(){  return {  }  },
+
+    }
+    export default app;
+</script>
+
+///////////////////////////////////////////////

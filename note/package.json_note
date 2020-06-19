@@ -1,0 +1,15 @@
+{
+
+    "scripts": {
+        
+        "test": "echo \"Error: no test specified\" && exit 1",
+        
+        
+        "dev": "webpack --watch --config ./config/webpack.config.js",    
+                // --watch 為持續監視有變化會馬上跟新   --config 後面接的是編譯設定黨的位置
+        
+        
+        "start": "nodemon server.js --exitcrash"     // nodemon 可以監視 node 出去的執行黨 一有變化 就重新載入 
+    },
+
+}

@@ -1,0 +1,49 @@
+.gitignore檔案  不想要被注意的檔案
+
+
+git init     // 建立 git 資料庫
+
+git remote add origin https://github.com/karta17012888/crawler_taiwan_lottery.git    為初次建立專案設定 git上傳網址
+
+git remote set-url origin https://github.com/karta17012888/crawler_taiwan_lottery.git   將專案設定 的git上傳網址改為.....
+
+git clone https://github.com/karta17012888/crawler_taiwan_lottery.git    下載這個 git 的檔案
+
+git add *       // 追蹤所有檔案
+it add <file>   // 追蹤 某個 檔案
+
+git rm <file>   // 刪除 某個 檔案
+git rm  <file>  --cached    // 不會刪除 某個檔案 , 但此檔案將不再被 git 追蹤
+
+git commit -m "abcd..."     // 儲存所有更動到 git 內,   'abcd...' == 註解
+
+git commit -a "abcd..."     // 等於直 add * 後 再 commit -m , 較方便 
+
+git mv hello.html world.html    // 修改 hello.html 檔名 變成 world.html
+
+git push -u origin master   // 上傳檔案 至雲端
+git push -f                 // 強制上傳
+
+git remote -v       // 確認 上傳網址
+
+git status          // 確認 git 狀態  
+
+git branch -a       // 查看分支
+
+git branch testing      // 創造分支 testing
+
+git checkout testing    // 移動到 testing 分支上
+
+
+                                                        ---> git clone ???  (下載檔案)
+初次設定 : git init -->  git remote add origin  ???  ---|  
+                                                        --->  上傳 請見下方
+
+
+
+上傳流程 :   `git add *` -->    `git commit -m "....."`   -->    `git push -u origin master`
+
+
+
+
+

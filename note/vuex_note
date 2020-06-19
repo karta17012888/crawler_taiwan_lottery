@@ -1,0 +1,61 @@
+vuex 格式 : 
+    import Vue from 'vue';
+    import Vuex from 'vuex';
+
+    Vue.use(Vuex);
+
+    const store_in = {
+                
+        components:{},
+
+        state: {  token: 7788,  },
+                
+        getters: {   // 外部呼叫 getters 可返回 state 原本或在整理的資料 
+
+            get_token: function( state ){  return state.token  }
+            
+            get_token_2: function( state, getters ){   // 可呼叫同為 getters 的 function 並加以整理該結果 並再回傳
+
+                return getters.get_token + 1
+            }
+        }, 
+                
+        actions: {   // 外部呼叫 actions 來執行 mutations 的 function ,   context 為傳入參數
+                    
+            set_token( {commit, dispatch, rootState, state}, context ) {  commit( 'set_token' , context );  },
+        },
+        
+        
+        mutations: {    // 只有這裡可以改變 state 的參數值 並且需要 actions 才可呼叫,  無法從以其他方式直接呼叫 
+                    
+            set_token: function( state, data ){  state.token = data  } ,
+        },
+    }
+
+    export default store_in;  
+
+
+
+
+
+vue 外部呼叫 :
+
+    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' ;
+
+
+    computed: {   
+        
+        ...mapState(  { aaa: "switch_lcoal" } ),    // 可呼喚 state 中的 switch_lcoal 並以 {{ aaa }} 使用它
+        
+        ...mapGetters( {  token: 'get_token'  } )   // 可呼喚 getters 中的 function get_token 並以 {{ token }} 使用它           
+    },
+   
+
+    methods:{
+        
+
+        ...mapActions( {  ccc: 'set_token'  } ),    // 可呼喚 actions 中的 function set_token 並以 this.ccc() 呼叫 並可傳參數
+    },
+
+
+

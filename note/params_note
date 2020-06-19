@@ -1,0 +1,45 @@
+////////////////////////////////////////////////////////////////
+
+在 server.js 中 網頁導向時
+
+router.get( "/home/:mode", function( req, res ){
+
+    res.sendFile( path.join( __dirname + '/views/index_2.html') )
+})
+可用 :??? 來代替多種變換頁面  ex:  /home/cart, /home/shopping 都映射
+
+////////////////////////////////////////////////////////////
+
+在 routers.js 中 可參雜 :??? 函數 並且 子路由 的呼喚 為 /home/:kk/cart 
+不能用 :kk 代替 cart, shopping
+
+{
+    path: '/home/:kk' ,   
+        
+    component: a_h_r_t ,
+        
+    children: [
+        {  path: '',  component: a_h_s  },
+            
+        {  path: "cart",  component: a_h_c  },   
+    ]
+        
+},
+
+/////////////////////////////////////////////////////////////////
+
+在前端 可用 <div> {{ $route.params.kk }} <div> 或 this.$route.params.kk 呼叫
+
+params.?? 的 ?? 需以 routers設定 :?? 的呼叫
+
+
+可用 
+    this.$router.push({ name: 'abc', params: { ??: '123' } }) 來設定 
+        
+    const userId = '123',   this.$router.push({ path: `/abc/${userId}` }   })
+
+
+
+
+
+

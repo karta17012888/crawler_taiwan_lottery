@@ -1,0 +1,9 @@
+npm init -yes   ||  設定最簡易的 npm 的環境       -yes: 跳過輸入專案細節
+
+
+npm i  ||  根據 package 安裝裡面有紀錄的套件
+
+ 
+npm i XXX --save-dev   ||   --save-dev: 在安裝新套件時自動加入 package.json 的開發列表
+
+

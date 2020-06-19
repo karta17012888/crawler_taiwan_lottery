@@ -1,0 +1,203 @@
+
+create database work DEFAULT CHARSET utf8 COLLATE utf8_general_ci;      // 創造資料庫 work  選定utf8
+
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'newpassword';          //創造一個新帳號, 帳密為( newuser, newpassword )
+
+GRANT ALL PRIVILEGES ON member.* TO 'test'@'localhost';                 //讓帳號 test 可以獲得 更改 member 資料庫的權限
+
+
+drop database test1;             // 刪去資料庫 test1
+
+
+create table sd_news(       // 創造資料表 sd_new 
+    
+    id int(10) auto_increment  primary key, //項目 類型 自動遞增  主鍵 ,
+    title char(50) ,                        //項目 類型,
+    local char(10) ,                        //項目 類型,
+    status char(10) , 
+    time char(20) ,
+    product_id INT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (id)   // 補充 product_id 欄位 是對外來鍵 對應 table product 的 id 欄位
+
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;    // 反正就這樣
+
+
+創建欄位的屬性:
+
+    型態: int(10), longtext, char(50), BLOB, DATETIME    // 整數, 文字, 文字, 二進位資料, 時間
+    
+    其餘屬性: PRIMARY KEY, NOT NULL, AUTO_INCREMENT      // 主鍵(該欄的每筆資料的值皆不可重複), 不可空, 如無指定數值 則自動輸入為上筆資料的+1 
+
+
+
+
+
+
+
+drop table sd_news;                 // 刪去資料表 sd_news
+
+delete from T1 where id = 1;        // 刪去資料表 T1 的 id = 1 列
+
+
+show create table sd_news;      // show 出資料表 sd_news 的資料屬性
+show create database work; 
+DESCRIBE sd_news;               // 資料表的資料屬性
+
+
+use my_db;                      // 指定使用某一個資料庫
+
+select * from sd_news ;          // show 出"資料表" sd_new 的資料
+
+
+
+insert into aaa( school, name, id ) values ( 'NCTU', 'Jerry' , '123' ); // 向資料表 aaa 匯入指定 項目的資料
+insert into aaa values ( 'NCTU' , 'Jerry' , '123' );                    // 向資料表 aaa 匯入照順序的 資料
+
+
+
+insert into sd_news values ( 1, '關懷轄區長者、貼心員警送4444444444', '臺北市政府警察局', '永久發佈', '2017-06-14 10:20:00', 1 , 1 );
+
+
+alter table sd_news convert to character set utf8;      // 將資料表 sd_news 字型改為 utf8
+
+
+load data local infile "C:/Users/08060351/Desktop/666.txt" into table sd_new;  載入 txt 檔 到某個資料表內
+
+
+
+
+SELECT x_1, x_2 FROM pet;           // 只顯示 table pet 中 x_1 x_2 行
+
+SELECT * FROM pet WHERE name = "Bowser";    // 只顯示 table pet 中 name="Bowser" 列
+
+
+//  合併表格
+SELECT a.name, a.Population coPop, b.Name, b.Population ciPop, b.Population / a.Population * 100 Scale      
+                                // 選取不同的table 的資料 用.xxx 表示
+FROM country a, city b          // 簡稱 country 為 a , city 為 b                                                                              
+WHERE a.Capital = b.ID          // 選定合併的項目 會讓兩個 table 中 值相同的表格自動配對                                                                                
+
+
+
+
+SELECT name, birth FROM pet ORDER BY birth;                             // 顯示 name,birth 行 並以 birth 排序 由小到大
+
+SELECT name, birth FROM pet ORDER BY birth DESC;                        // 顯示 name,birth 行 並以 birth 排序 由大到小
+
+SELECT name, species, birth FROM pet ORDER BY species, birth DESC;      // 顯示 ...行 並先以 species 再以 birth 排序
+
+
+
+SELECT name, birth, death, (TO_DAYS(death)-TO_DAYS(birth))/365 AS age FROM pet WHERE death IS NOT NULL ORDER BY age;
+// 顯示 ( ..., 把(TO_DAYS(death)-TO_DAYS(birth))/365 當作 age )  行   並按照  birth 不為空 的 age 來排列 
+
+
+birth = '1993-02-04', YEAR( birth )=1993, MONTH(),  DAYOFMONTH()
+
+
+select * from test_a  limit 2,5 ;       // 顯示 table test_a  數據 先跳過 2筆 再選擇 後5筆 
+
+
+update  sd_news set title = concat( title, "修改" ) where title = '測試0830' ;          // 在 title = '測試0830' 的資料裡 將 title 加上 "修改" 的字樣
+update  test_a set score = score +10 ;          // 把 table `test_a` 的欄位 `score` 全部 +10
+
+update  `data_1_1` set `img`= where `id` = 1 ; 
+
+
+select id, name, score, if( score > 30, 'good', 'bad' ) lv from test_a ;               // 顯示 id, name, score 及 一欄 lv 格 內容為判別式 值為 good bad
+
+
+select id, name,  score,
+        case
+            when score <= 25 then "c"
+            when 25 < score and score <= 40 then "b"
+            else "a"
+        end lv
+from test_a ;
+
+select id, name, 
+        case name
+            when 'taiwan' then "asia"
+            when "newyork" then "us"
+        end local
+from test_a ;
+
+
+
+select * from test_a where name like '%j%';             // 尋找 name 裡面有 j 的項目
+
+
+ALTER TABLE sd_news ADD COLUMN `id` int FIRST ;        // 在table 中 加入名叫 id 的欄位 屬性為 int 在最前
+
+ALTER TABLE `work`.`data_4_1` ADD COLUMN type char(50)  after id;    //在table 中 加入名叫 type 的欄位 屬性為 char 在欄位 id 的後面
+
+ALTER TABLE sd_news ADD COLUMN `id` int;               // 在table 中 加入名叫 id 的欄位 屬性為 int 
+
+ALTER TABLE sd_news ADD COLUMN `id` int auto_increment  primary key FIRST ;       // 加入 id 欄位  放在最前 並給它住 主鍵 自增 的屬性
+
+
+
+ALTER TABLE `sd_news` DROP `id`;                            // 在table 中 刪除名叫 id 的欄位            
+
+
+rename table `sd_news` to `data_1_1`                        // table xxx 的名子改為 yyy
+
+ALTER TABLE `data_1_1` change column `time` `time1` char(225);    // 修改 `data_1_1` 中的 time 欄位的名子至time1
+
+
+
+ALTER TABLE User AUTO_INCREMENT = 1;     // 重設AUTO_INCREMENT的值
+
+
+alter table `data_1_1` modify column `time` varchar(50);       // 修改 `data_1_1` 中的欄位 time 的資料屬性
+
+
+
+
+
+select * from work.data_1_1 where time1 between 2016-01-01 and 2016-12-31    // 搜尋時間欄位 介於 a b 之間
+
+
+use shopping_cart    // 切換到使用 資料庫 shopping_cart
+
+
+
+mysql -u testing -p  // 切換到 帳號testing 後須輸入密碼
+
+
+
+
+
+
+
+set @abc = "6";   // 等同於 js 的 var abc="6",  一定要 在命名的參數前加 @,  呼叫時也需要         
+
+select @abc;
+
+BEGIN   DECLARE a INT;   SET a = 5;   END; 
+
+
+show procedure status;      //顯示 procedure 狀態
+
+show create procedure a1;  // 顯示 procedure a 1的建立內容
+
+
+----------------------------------------------------------------
+create procedure a1( a int ) 
+
+begin
+
+    label1: loop
+        set a = a + 1;
+        SELECT a ;
+
+        if a < 10 then iterate label1; end if ;
+
+        leave label1;
+
+    end loop label1;
+
+    set @x = a;
+end
+--------------------------------------------------------------
+call a1( 8 ) 

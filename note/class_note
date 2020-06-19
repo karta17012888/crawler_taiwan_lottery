@@ -1,0 +1,27 @@
+
+var person = function( name, age ){   // 藍圖
+    
+    this.name = name; 
+    this.age = age;   
+    
+    this.say_hello = function(){
+        console.log( 'hi, i am  ' + this.name  )
+    }
+
+};
+
+
+var jack = new person( 'jack', 20 )  // 建立實例
+
+console.log( jack.name ),  jack.say_hello(),    // 用這種方式呼叫
+
+
+person.prototype.say_sorry = function(){        // 可以增加或修改 class 裡面的東西  
+
+    console.log(  'i so sorry, ' + this.name  )
+}
+
+
+
+var john = new jack.constructor( 'john', 25 )   // 可以用某個實例的格式 建造一個新的實例 但不常見
+

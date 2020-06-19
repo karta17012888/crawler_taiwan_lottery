@@ -1,0 +1,43 @@
+npm i xxx --save-dev
+
+path
+express   
+axios
+
+nodemon
+
+webpack
+webpack-cli
+
+postcss-preset-env
+@babel/core
+@babel/preset-env
+babel-loader
+vue-loader
+style-loader
+css-loader
+postcss-loader
+url-loader
+file-loader
+
+
+vue
+vue-router
+vuex
+
+
+mysql
+
+dotenv  // 用來和 .env 連動 註冊環境變數 
+
+jsonwebtoken  // 驗證token
+
+moment  // 用 moment( aa ).format('YYYY-MM-DD HH:mm:ss') 來轉換日期格式
+
+nodemailer  // 寄 email
+
+firebase  //???
+
+
+querystring     // 後端爬蟲 參數轉 x-www-form-u 格式  
+
